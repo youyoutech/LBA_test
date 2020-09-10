@@ -2,6 +2,7 @@ var express = require('express')
 var cors = require('cors')
 var mongoose = require('mongoose')
 const ProductRouter = require('./routes/product')
+const UserRouter = require('./routes/user')
 let Product = require('./models/product.model')
 
 
@@ -24,6 +25,7 @@ connection.once('open', () => {
 })
 
 app.use('/product', ProductRouter)
+app.use('/user', UserRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

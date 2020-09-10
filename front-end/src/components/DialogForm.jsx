@@ -8,8 +8,20 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import { DialogContent, TextField } from '@material-ui/core';
+import { DialogContent, TextField, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
+
+
+const availability = [
+    {
+      value: 'true',
+      label: 'Disponible',
+    },
+    {
+      value: 'false',
+      label: 'Non Disponible',
+    }
+  ];
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -33,7 +45,7 @@ export default function AddDialog(props) {
     const [price, setPrice] = useState("");
     const [rating, setRating] = useState(0);
     const [warranty_years, setWarrantyYears] = useState(0);
-    const [available, setAvailable] = useState(false);
+    const [available, setAvailable] = useState("false");
 
 
 
@@ -58,10 +70,7 @@ export default function AddDialog(props) {
     }
 
     const onChangeAvailable = (e) => {
-        if(e.target.value === ("true" || "false"))
-            setAvailable(e.target.value)
-        else
-            setAvailable("false")
+        setAvailable(e.target.value)
     }
 
     const onSubmit = (e) => {
@@ -182,15 +191,18 @@ export default function AddDialog(props) {
                         required
                     />
                     <TextField
-                        autoFocus
-                        margin="dense"
                         id="available"
-                        label="Disponilbe (true OU false)"
-                        type="text"
-                        fullWidth
+                        select
+                        label="Diponibilité"
+                        value={available}
                         onChange={onChangeAvailable}
-                        required
-                    />
+                    >
+                        {availability.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </DialogContent>
             </Dialog>
         </Fragment>
