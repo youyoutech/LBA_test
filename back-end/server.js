@@ -12,7 +12,7 @@ app.use(cors())
 
 require('dotenv').config()
 
-var port = process.env.PORT || 3000
+var port = process.env.PORT || 4000
 
 const uri = "mongodb://127.0.0.1:27017/LBA_test"
 
