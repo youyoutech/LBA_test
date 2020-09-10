@@ -29,7 +29,7 @@ router.route('/:id').put((req, res) => {
         price: Number(req.body.price),
         rating: Number(req.body.rating),
         warranty_years: Number(req.body.warranty_years),
-        available: Boolean(req.body.available)
+        available: req.body.available
     }
 
     Product.findOneAndUpdate({ _id: req.params.id }, newData)
@@ -58,7 +58,7 @@ router.route('/add').post((req, res) => {
         price: Number(req.body.price),
         rating: Number(req.body.rating),
         warranty_years: Number(req.body.warranty_years),
-        available: Boolean(req.body.available)
+        available: req.body.available
     }
 
     Product.findOne({

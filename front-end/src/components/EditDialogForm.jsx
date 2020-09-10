@@ -8,8 +8,19 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import CloseIcon from '@material-ui/icons/Close';
 import Slide from '@material-ui/core/Slide';
-import { DialogContent, TextField } from '@material-ui/core';
+import { DialogContent, TextField, MenuItem } from '@material-ui/core';
 import Axios from 'axios';
+
+const availability = [
+    {
+      value: 'true',
+      label: 'Disponible',
+    },
+    {
+      value: 'false',
+      label: 'Non Disponible',
+    }
+  ];
 
 const useStyles = makeStyles((theme) => ({
     appBar: {
@@ -58,10 +69,7 @@ export default function EditDialog(props) {
     }
 
     const onChangeAvailable = (e) => {
-        if (e.target.value === ("true" || "false"))
-            setAvailable(e.target.value)
-        else
-            setAvailable("false")
+        setAvailable(e.target.value)
     }
 
     const onSubmit = (e) => {
@@ -189,15 +197,18 @@ export default function EditDialog(props) {
                         value={warranty_years}
                     />
                     <TextField
-                        autoFocus
-                        margin="dense"
                         id="available"
-                        label="Disponilbe (true OU false)"
-                        type="text"
-                        fullWidth
+                        select
+                        label="Diponibilité"
+                        value={available}
                         onChange={onChangeAvailable}
-                        required
-                    />
+                    >
+                        {availability.map((option) => (
+                            <MenuItem key={option.value} value={option.value}>
+                                {option.label}
+                            </MenuItem>
+                        ))}
+                    </TextField>
                 </DialogContent>
             </Dialog>
         </Fragment>
